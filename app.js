@@ -97,6 +97,34 @@ passport.use(new LocalStrategy((username, password, next) => {
   });
 }));
 
+//Google oauth
+passport.use(new GoogleStrategy({
+  clientID: process.env.google_client_id,
+  clientSecret: process.env.google_client_secret,
+  callbackURL: "/auth/google/callback",
+  proxy: true
+}, (accessToken, refreshToken, profile, done) => {
+  User.findOne({ googleID: profile.id })
+  .then((user, err) => {
+    if (err) {
+      return done(err);
+    }
+    if (user) {
+      return done(null, user);
+    }
+    const newUser = new User({
+      googleID: profile.id
+    });
+    return newUser.save()
+    .then(user => {
+      done(null, newUser);
+    })
+  })
+  .catch(error => {
+    console.log(error)
+  })
+}));
+
 
 // default value for title local
 app.locals.title = 'Express - Generated with IronGenerator';

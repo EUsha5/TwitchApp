@@ -1,7 +1,8 @@
 // routes/auth-routes.js
-const express  = require("express");
-const router   = express.Router();
-const passport = require('passport');
+const express    = require("express");
+const router     = express.Router();
+const passport   = require('passport');
+const nodemailer = require('nodemailer');
 
 // User model
 const User = require("../models/User");
@@ -44,6 +45,23 @@ router.post("/signup", (req, res, next) => {
           password: hashPass
       })
       .then((response)=>{
+        let email = req.body.email;
+        let message = "You're Awesome, keep it up"
+
+        let transporter = nodemailer.createTransport({
+          service: 'Gmail',
+          auth: {
+            user: 'thisguyistheanswer@gmail.com',
+            pass: 'imawesome2k' 
+          }
+        });
+        transporter.sendMail({
+          from: '"Casper the Game Ghost  👻" <casper@movieproject.com>',
+          to: email, 
+          subject: "Whose Awesome?", 
+          text: message,
+          html: `<b>${message}</b>`
+        })
     })
     .catch(error => {
       next(error)
@@ -82,6 +100,16 @@ router.post("/signup", (req, res, next) => {
         }
     });
   });
+
+  router.get("/auth/google", passport.authenticate("google", {
+    scope: ["https://www.googleapis.com/auth/plus.login",
+            "https://www.googleapis.com/auth/plus.profile.emails.read"]
+  }));
+  
+  router.get("/auth/google/callback", passport.authenticate("google", {
+    failureRedirect: "/",
+    successRedirect: "/"
+  }));
 
   //logout
   router.get('/logout', (req, res, next)=>{
