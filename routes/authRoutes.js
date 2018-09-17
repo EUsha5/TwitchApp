@@ -55,13 +55,33 @@ router.post("/signup", (req, res, next) => {
       res.render('userViews/login', {message: req.flash('error')})
   });
 
-  router.post('/login', passport.authenticate('local', {
-    successRedirect: "/",
-    failureRedirect: "/login",
-    failureFlash: true,
-    successFlash: true,
-    passReqToCallback: true
-  }));
+  router.post("/login", (req, res, next) => {
+    const username = req.body.username;
+    const password = req.body.password;
+    if (username === "" || password === "") {
+      res.render("auth/login", {
+        errorMessage: "Indicate a username and a password to sign up"
+      });
+      return;
+    }
+    User.findOne({ "username": username }, (err, user) => {
+        if (err || !user) {
+          res.render("auth/login", {
+            errorMessage: "The username doesn't exist"
+          });
+          return;
+        }
+        if (bcrypt.compareSync(password, user.password)) {
+          // Save the login in the session!
+          req.session.currentUser = user;
+          res.redirect("/");
+        } else {
+          res.render("auth/login", {
+            errorMessage: "Incorrect password"
+          });
+        }
+    });
+  });
 
   //logout
   router.get('/logout', (req, res, next)=>{

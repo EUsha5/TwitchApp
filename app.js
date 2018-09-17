@@ -1,21 +1,22 @@
 require('dotenv').config();
 
-const bodyParser      = require('body-parser');
-const cookieParser    = require('cookie-parser');
-const express         = require('express');
-const session         = require("express-session");
-const favicon         = require('serve-favicon');
-const hbs             = require('hbs');
-const mongoose        = require('mongoose');
-const logger          = require('morgan');
-const path            = require('path');
-const passport        = require("passport");
-const LocalStrategy   = require("passport-local").Strategy;
-const User            = require('./models/User')
-const ensureLogin     = require("connect-ensure-login");
-const flash           = require("connect-flash");
-const MongoStore      = require("connect-mongo")(session);
-const bcrypt          = require("bcryptjs");
+const bodyParser        = require('body-parser');
+const cookieParser      = require('cookie-parser');
+const express           = require('express');
+const session           = require("express-session");
+const favicon           = require('serve-favicon');
+const hbs               = require('hbs');
+const mongoose          = require('mongoose');
+const logger            = require('morgan');
+const path              = require('path');
+const passport          = require("passport");
+const LocalStrategy     = require("passport-local").Strategy;
+const GoogleStrategy  = require("passport-google-oauth").OAuth2Strategy;
+const ensureLogin       = require("connect-ensure-login");
+const flash             = require("connect-flash");
+const MongoStore        = require("connect-mongo")(session);
+const bcrypt            = require("bcryptjs");
+const User              = require('./models/User');
 
 
 mongoose
@@ -108,13 +109,14 @@ app.use(function (req, res, next){
 })
 
 
+
 const index = require('./routes/index');
 app.use('/', index);
 
-const signup = require('./routes/authroutes');
+const signup = require('./routes/authRoutes');
 app.use('', signup)
 
-const login = require('./routes/authroutes');
+const login = require('./routes/authRoutes');
 app.use('', login)
 
 
