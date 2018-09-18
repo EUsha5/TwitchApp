@@ -6,8 +6,8 @@ const userSchema = new Schema({
   password: String,
   googleID: String,
   first: String,
-  Last: String,
-  game: [],
+  last: String,
+  games: [],
   comments: [],
   Avatar: {type: String, default: "https://i.pinimg.com/originals/db/d7/45/dbd74562d9c8e30188bf7c71e901ee85.jpg"},
 }, {

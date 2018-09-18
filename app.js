@@ -147,5 +147,8 @@ app.use('', signup)
 const login = require('./routes/authRoutes');
 app.use('', login)
 
+const profile = require('./routes/profileRoute');
+app.use('', profile)
+
 
 module.exports = app;

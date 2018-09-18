@@ -62,12 +62,13 @@ router.post("/signup", (req, res, next) => {
           text: message,
           html: `<b>${message}</b>`
         })
+        res.redirect("/profile");
+      })
     })
     .catch(error => {
       next(error)
     })
-  })
-});
+  });
 
   router.get('/login', (req, res, next)=>{
       res.render('userViews/login', {message: req.flash('error')})
@@ -77,14 +78,14 @@ router.post("/signup", (req, res, next) => {
     const username = req.body.username;
     const password = req.body.password;
     if (username === "" || password === "") {
-      res.render("auth/login", {
+      res.render("/login", {
         errorMessage: "Indicate a username and a password to sign up"
       });
       return;
     }
     User.findOne({ "username": username }, (err, user) => {
         if (err || !user) {
-          res.render("auth/login", {
+          res.render("/login", {
             errorMessage: "The username doesn't exist"
           });
           return;
@@ -92,9 +93,9 @@ router.post("/signup", (req, res, next) => {
         if (bcrypt.compareSync(password, user.password)) {
           // Save the login in the session!
           req.session.currentUser = user;
-          res.redirect("/");
+          res.redirect("/profile");
         } else {
-          res.render("auth/login", {
+          res.render("/login", {
             errorMessage: "Incorrect password"
           });
         }
@@ -107,8 +108,8 @@ router.post("/signup", (req, res, next) => {
   }));
   
   router.get("/auth/google/callback", passport.authenticate("google", {
-    failureRedirect: "/",
-    successRedirect: "/"
+    failureRedirect: "/signup",
+    successRedirect: "/profile"
   }));
 
   //logout
