@@ -1,0 +1,15 @@
+<h1>Edit a game!</h1>
+
+<form action="/games/update/{{theGame._id}}" method="post" enctype="multipart/form-data">
+
+  <label for="">Name: </label>
+  <input type="text" name="name" value="">
+
+  <label>Image</label>
+  <input type="file" name="photo">
+
+  <label>Description: </label>
+  <input type="textarea" name="description" value="">
+  <button>Edit</button>
+
+</form>

@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 const Schema   = mongoose.Schema;
 
 const gameSchema = new Schema({
-  creator: String,
+  name: String,
+  creator: {type: Schema.Types.ObjectId, ref: "User"},
   liveURL: String,
   description: String,
   comments: [],

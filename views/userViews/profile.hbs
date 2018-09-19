@@ -1,1 +1,29 @@
-<h1>{{user.username}}'s Profile</h1>
+<h1>{{profile.username}}'s Profile</h1>
+<a href="/profile/edit/{{profile.id}}">
+  <button>Edit Profile</button>
+</a>
+
+<img src="{{profile.avatar}}">
+
+<h4>About {{profile.username}}: </h4>
+<p>{{profile.aboutme}}</p>
+
+<div>
+  <h4>Games: </h4>
+    {{#each profile.games}}
+  <a href="">
+      <p>{{this.name}}</p>
+  </a>
+        <img src="this.image">
+      <p>{{this.description}}</p>
+    {{/each}}
+    
+</div>
+
+<div>
+  <h4>Comments: </h4>
+  {{#each profile.comments}}
+  <p>{{this.owner}}: </p>
+  <p>{{this.comment}}</p>
+  {{/each}}
+</div>

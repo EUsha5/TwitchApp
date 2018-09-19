@@ -11,7 +11,6 @@ const logger            = require('morgan');
 const path              = require('path');
 const passport          = require("passport");
 const LocalStrategy     = require("passport-local").Strategy;
-const GoogleStrategy  = require("passport-google-oauth").OAuth2Strategy;
 const ensureLogin       = require("connect-ensure-login");
 const flash             = require("connect-flash");
 const MongoStore        = require("connect-mongo")(session);
@@ -57,7 +56,7 @@ app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 //passport set up
 app.use(session({
   secret: "basic-auth-secret",
-  cookie: { maxAge: 60000 },
+  cookie: { maxAge: 600000 },
   store: new MongoStore({
     mongooseConnection: mongoose.connection,
     ttl: 24 * 60 * 60 
@@ -88,43 +87,14 @@ passport.use(new LocalStrategy((username, password, next) => {
       return next(err);
     }
     if (!user) {
-      return next(null, false, { message: "Incorrect username" });
+      return next(null, false, {message: "Incorrect username" });
     }
     if (!bcrypt.compareSync(password, user.password)) {
-      return next(null, false, { message: "Incorrect password" });
+      return next(null, false, {message: "Incorrect password" });
     }
     return next(null, user, {message: 'you have successfully logged in'});
   });
 }));
-
-//Google oauth
-passport.use(new GoogleStrategy({
-  clientID: process.env.google_client_id,
-  clientSecret: process.env.google_client_secret,
-  callbackURL: "/auth/google/callback",
-  proxy: true
-}, (accessToken, refreshToken, profile, done) => {
-  User.findOne({ googleID: profile.id })
-  .then((user, err) => {
-    if (err) {
-      return done(err);
-    }
-    if (user) {
-      return done(null, user);
-    }
-    const newUser = new User({
-      googleID: profile.id
-    });
-    return newUser.save()
-    .then(user => {
-      done(null, newUser);
-    })
-  })
-  .catch(error => {
-    console.log(error)
-  })
-}));
-
 
 // default value for title local
 app.locals.title = 'Express - Generated with IronGenerator';
@@ -147,8 +117,10 @@ app.use('', signup)
 const login = require('./routes/authRoutes');
 app.use('', login)
 
-const profile = require('./routes/profileRoute');
+const profile = require('./routes/profileRoutes');
 app.use('', profile)
 
+const game = require('./routes/gameRoutes');
+app.use('', game)
 
 module.exports = app;

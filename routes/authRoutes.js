@@ -6,15 +6,13 @@ const nodemailer = require('nodemailer');
 
 // User model
 const User = require("../models/User");
-
 const bcrypt = require("bcryptjs");
-
 const bcryptSalt = 10;
 
 
 
 router.get("/signup", (req, res, next) => {
-    res.render("userViews/signup");
+    res.render("authViews/signup");
   });
   
 
@@ -26,14 +24,14 @@ router.post("/signup", (req, res, next) => {
   
     if (username === "" || password === "") {
       req.flash('error', 'please specify a username and password to sign up')
-      res.render("userViews/signup", { message: req.flash("error") });
+      res.render("authViews/signup", { message: req.flash("error") });
       return;
     }
   
     User.findOne({ username })
     .then(user => {
       if (user !== null) {
-        res.render("userViews/signup", { message: req.flash("error") });
+        res.render("authViews/signup", { message: req.flash("error") });
         return;
       }
   
@@ -62,7 +60,7 @@ router.post("/signup", (req, res, next) => {
           text: message,
           html: `<b>${message}</b>`
         })
-        res.redirect("/profile");
+        res.redirect(`/profile/${response._id}`);
       })
     })
     .catch(error => {
@@ -71,21 +69,21 @@ router.post("/signup", (req, res, next) => {
   });
 
   router.get('/login', (req, res, next)=>{
-      res.render('userViews/login', {message: req.flash('error')})
+      res.render('authViews/login', {message: req.flash('error')})
   });
 
   router.post("/login", (req, res, next) => {
     const username = req.body.username;
     const password = req.body.password;
     if (username === "" || password === "") {
-      res.render("/login", {
+      res.render("authViews/login", {
         errorMessage: "Indicate a username and a password to sign up"
       });
       return;
     }
     User.findOne({ "username": username }, (err, user) => {
         if (err || !user) {
-          res.render("/login", {
+          res.render("authViews/login", {
             errorMessage: "The username doesn't exist"
           });
           return;
@@ -93,24 +91,14 @@ router.post("/signup", (req, res, next) => {
         if (bcrypt.compareSync(password, user.password)) {
           // Save the login in the session!
           req.session.currentUser = user;
-          res.redirect("/profile");
+          res.redirect(`/profile`);
         } else {
-          res.render("/login", {
+          res.render("authViews/login", {
             errorMessage: "Incorrect password"
           });
         }
     });
   });
-
-  router.get("/auth/google", passport.authenticate("google", {
-    scope: ["https://www.googleapis.com/auth/plus.login",
-            "https://www.googleapis.com/auth/plus.profile.emails.read"]
-  }));
-  
-  router.get("/auth/google/callback", passport.authenticate("google", {
-    failureRedirect: "/signup",
-    successRedirect: "/profile"
-  }));
 
   //logout
   router.get('/logout', (req, res, next)=>{

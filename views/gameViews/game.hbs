@@ -1,0 +1,13 @@
+<h3>List of Games</h3>
+<a href="/game/new">
+  <button>Add Game</button>
+</a>
+{{#each listOfGames}}
+  <a href="">
+    <p>{{this.name}}</p>
+  </a>
+    {{!-- <img src="this.image"> --}}
+    <p>{{this.description}}</p>
+    <p>{{this.creator.username}}</p>
+{{/each}}
+
