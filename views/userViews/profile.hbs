@@ -1,7 +1,10 @@
 <h1>{{profile.username}}'s Profile</h1>
+
+{{#if editable}}
 <a href="/profile/edit/{{profile.id}}">
   <button>Edit Profile</button>
 </a>
+{{/if}}
 
 <img src="{{profile.avatar}}">
 

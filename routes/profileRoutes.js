@@ -8,14 +8,22 @@ const User        = require("../models/User");
 const Game        = require("../models/Game");
 
 router.get("/profile", (req, res, next) => {
+  var editable;
   console.log("================================ ", req.user);
   User.findById(req.user._id)
   .then((profile) => {
+    console.log("the profile info &&&&&&&&&&&&&&&&&& ", profile);
+    if(req.user.username === profile.username){
+      editable = true;
+      } else {
+      editable = false;
+      }    
     Game.find({_id: profile.games})
     .then((response) =>{
       data = {
         profile: profile,
-        games: response
+        games: response,
+        editable: editable
       }
       res.render('userViews/profile', data)
     })
@@ -34,9 +42,6 @@ router.post('/profile/update/:id', (req, res, next) => {
     aboutme: req.body.aboutme,
     avatar: req.body.avatar,
   }
-  // if(req.file) {
-  //   theupdate.avatar = req.file.url
-  // }
   User.findOneAndUpdate(req.params.id, theupdate)
     .then((response)=>{
       console.log('=-=-=-=-=-=-', response)
@@ -53,18 +58,11 @@ router.post('/profile/update/:id', (req, res, next) => {
 router.get('/profile/edit/:id', (req, res, next) => {
   User.findById(req.params.id)
 .then((aUser) => {
-  // Games.find()
-  // .then((gameInfo) => {
     res.render('userViews/edit', {theUser: aUser});
   })
-  // .catch((err) => {
-  //   next(err);
-  // })
   .catch((err) => {
     next(err)
   });
 })
-// });
-
 
 module.exports = router;

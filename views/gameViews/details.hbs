@@ -5,9 +5,11 @@
 <p>{{gameInfo.description}}</p>
 
 <a href="{{gameInfo.liveURL}}">Test Me!</a>
-
-
+{{deletable}}
+{{#if deletable}}
+<h1>AHHAHHAHAHAHAHAHHAAHHHAHA!!!!!!</h1>
 <button>
   <a href="/game/delete/{{gameInfo._id}}">Delete Game</a>
 </button>
+{{/if}}
 

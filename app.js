@@ -16,8 +16,8 @@ const flash             = require("connect-flash");
 const MongoStore        = require("connect-mongo")(session);
 const bcrypt            = require("bcryptjs");
 const User              = require('./models/User');
-const app_name = require('./package.json').name;
-const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.')[0]}`);
+const app_name          = require('./package.json').name;
+const debug             = require('debug')(`${app_name}:${path.basename(__filename).split('.')[0]}`);
 
 
 const app = express();
@@ -58,12 +58,6 @@ mongoose
     });
   }));
 
-
-// app.use((req, res, next) => {
-//   res.locals.currentUser = req.user;
-//   next();
-// });
-
 // Express View engine setup
 
 app.use(require('node-sass-middleware')({
@@ -102,7 +96,7 @@ app.use(passport.session());
 
 
 // default value for title local
-app.locals.title = 'Express - Generated with IronGenerator';
+app.locals.title = 'Game-Start';
 
 app.use(function (req, res, next){
   res.locals = {

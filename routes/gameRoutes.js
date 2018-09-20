@@ -77,13 +77,20 @@ router.get('/game/delete/:id', (req, res, next) =>{
 });
 
 router.get('/game/:id', (req, res, next) => {
+  var deletable;
   Game.findById(req.params.id)
   .then((gameInfo)=>{
     User.findById(gameInfo.creator)
     .then((userFromDB) => {
+      if(req.user._id.toString() === gameInfo.creator.toString()){
+        deletable = true;
+        } else {
+        deletable = false;
+        }        
       data = {
         gameInfo: gameInfo,
-        gameCreator: userFromDB
+        gameCreator: userFromDB,
+        deletable: deletable,
       };
       res.render('gameViews/details', data);
     })
