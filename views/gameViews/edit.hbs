@@ -10,6 +10,10 @@
 
   <label>Description: </label>
   <input type="textarea" name="description" value="">
+  
+  {{#if user === currentUser}}
   <button>Edit</button>
+  {{else}}
+  {{/if}}
 
 </form>
