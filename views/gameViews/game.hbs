@@ -3,11 +3,9 @@
   <button>Add Game</button>
 </a>
 {{#each listOfGames}}
-  <a href="">
+  <a href="/game/{{this.id}}">
     <p>{{this.name}}</p>
   </a>
-    {{!-- <img src="this.image"> --}}
-    <p>{{this.description}}</p>
-    <p>{{this.creator.username}}</p>
+    <img class="list-image" src="{{this.image}}">
 {{/each}}
 

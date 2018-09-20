@@ -10,12 +10,10 @@
 
 <div>
   <h4>Games: </h4>
-    {{#each profile.games}}
-  <a href="">
-      <p>{{this.name}}</p>
-  </a>
-        <img src="this.image">
-      <p>{{this.description}}</p>
+    {{#each games}}
+      <a href="/game/{{this.id}}">
+          <p>{{this.name}}</p>
+      </a>
     {{/each}}
     
 </div>

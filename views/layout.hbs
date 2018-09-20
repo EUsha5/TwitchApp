@@ -8,16 +8,20 @@
   <link rel="stylesheet" href="/stylesheets/style.css" />
 </head>
 <body>
-  <a href="/profile">Profile</a>
-  <a href="/game">Games</a>
-  {{!-- {{#if user}} --}}
-  <a href="/logout">Log Out</a>
-  {{!-- {{else}} --}}
-  <a href="/signup">Sign Up</a>
-  <a href="/login">Log In</a>
-  {{!-- {{/if}} --}}
-  {{{body}}}
+  <nav class="nav-bar">
+    <a href="/profile">Profile</a>
+    <a href="/game">Games</a>
+    <div>
+    {{#if user}}
+      <a href="/logout">Log Out</a>
+    {{else}}
+      <a href="/login">Log In/SignUp</a>
+    {{/if}}
+    </div>
+    <br />
+  </nav>
 
+    {{{body}}}
   <script src="/javascripts/script.js"></script>
 </body>
 </html>

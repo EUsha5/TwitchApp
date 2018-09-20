@@ -3,31 +3,44 @@ const express     = require("express");
 const router      = express.Router();
 const uploadCloud = require('../config/cloudinary.js');
 const ensureLogin = require("connect-ensure-login");
+const multer      = require("multer");
 const User        = require("../models/User");
-const multer      = require("multer")
+const Game        = require("../models/Game");
 
 router.get("/profile", (req, res, next) => {
-  User.findById(req.session.currentUser._id)
+  console.log("================================ ", req.user);
+  User.findById(req.user._id)
   .then((profile) => {
-    res.render('userViews/profile', {profile:  profile})
+    Game.find({_id: profile.games})
+    .then((response) =>{
+      data = {
+        profile: profile,
+        games: response
+      }
+      res.render('userViews/profile', data)
+    })
+    .catch((err) => {
+      next(err);
+    })
     })
   .catch((err)=>{
     next(err);
   });
 });
 
-router.post('/profile/update/:id', uploadCloud.single('photo'), (req, res, next) => {
+router.post('/profile/update/:id', (req, res, next) => {
   const theupdate = {
     username: req.body.username,
     aboutme: req.body.aboutme,
     avatar: req.body.avatar,
   }
   // if(req.file) {
-  //   theupdate.avatar = req.file.avatar
+  //   theupdate.avatar = req.file.url
   // }
-  User.findByIdAndUpdate(req.params.id, theupdate)
+  User.findOneAndUpdate(req.params.id, theupdate)
     .then((response)=>{
-      res.redirect(`/profile/${response._id}`);
+      console.log('=-=-=-=-=-=-', response)
+      res.redirect(`/profile`);
 
     })
     .catch((err)=>{

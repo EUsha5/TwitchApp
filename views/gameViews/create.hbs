@@ -1,7 +1,7 @@
 <h1>Add a New Game</h1>
 
 
-<form action="/game/create" method="post" >
+<form action="/game/create" method="post" enctype="multipart/form-data">
 
     <label for="">Name</label>
     <input type="text" name="name">
@@ -12,8 +12,8 @@
     <label for="">Link</label>
     <input type="text" name="liveURL">
 
-    <label>Image</label>
-    <input type="file" name="photo">
+    <label for="">Image</label>
+    <input type="file" name='photo'>
 
     <button>Add</button>
 </form>

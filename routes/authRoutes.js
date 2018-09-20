@@ -54,13 +54,13 @@ router.post("/signup", (req, res, next) => {
           }
         });
         transporter.sendMail({
-          from: '"Casper the Game Ghost  👻" <casper@movieproject.com>',
+          from: '"Casper the Game Ghost  👻" <casper@gamestart.com>',
           to: email, 
           subject: "Whose Awesome?", 
           text: message,
           html: `<b>${message}</b>`
         })
-        res.redirect(`/profile/${response._id}`);
+        res.redirect("/login");
       })
     })
     .catch(error => {
@@ -72,33 +72,42 @@ router.post("/signup", (req, res, next) => {
       res.render('authViews/login', {message: req.flash('error')})
   });
 
-  router.post("/login", (req, res, next) => {
-    const username = req.body.username;
-    const password = req.body.password;
-    if (username === "" || password === "") {
-      res.render("authViews/login", {
-        errorMessage: "Indicate a username and a password to sign up"
-      });
-      return;
-    }
-    User.findOne({ "username": username }, (err, user) => {
-        if (err || !user) {
-          res.render("authViews/login", {
-            errorMessage: "The username doesn't exist"
-          });
-          return;
-        }
-        if (bcrypt.compareSync(password, user.password)) {
-          // Save the login in the session!
-          req.session.currentUser = user;
-          res.redirect(`/profile`);
-        } else {
-          res.render("authViews/login", {
-            errorMessage: "Incorrect password"
-          });
-        }
-    });
-  });
+  // router.post("/login", (req, res, next) => {
+  //   const username = req.body.username;
+  //   const password = req.body.password;
+  //   if (username === "" || password === "") {
+  //     res.render("authViews/login", {
+  //       errorMessage: "Indicate a username and a password to sign up"
+  //     });
+  //     return;
+  //   }
+  //   User.findOne({ "username": username }, (err, user) => {
+  //       if (err || !user) {
+  //         res.render("authViews/login", {
+  //           errorMessage: "The username doesn't exist"
+  //         });
+  //         return;
+  //       }
+  //       if (bcrypt.compareSync(password, user.password)) {
+  //         // Save the login in the session!
+  //         req.session.currentUser = user;
+  //         req.session.save();
+  //         res.redirect(`/profile`);
+  //       } else {
+  //         res.render("authViews/login", {
+  //           errorMessage: "Incorrect password"
+  //         });
+  //       }
+  //   });
+  // });
+
+router.post('/login', passport.authenticate('local', {
+  successRedirect: "/profile",
+  failureRedirect: "/login",
+  failureFlash: true,
+  successFlash: true,
+  passReqToCallback: true
+}));
 
   //logout
   router.get('/logout', (req, res, next)=>{
