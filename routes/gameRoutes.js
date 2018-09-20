@@ -1,11 +1,12 @@
 const express           = require("express");
 const router            = express.Router();
 const uploadCloud       = require('../config/cloudinary.js');
+const ensureLogin       = require("connect-ensure-login");
 const Game              = require("../models/Game");
 const User              = require("../models/User");
 
 
-router.get("/game", (req, res, next) =>{
+router.get("/game", ensureLogin.ensureLoggedIn('/login'), (req, res, next) =>{
  Game.find()
   .then((response) => {
     res.render('gameViews/game', {listOfGames: response})
@@ -19,7 +20,7 @@ router.get('/game/new', (req, res, next) => {
   res.render('gameViews/create')
 })
 
-router.post('/game/create', uploadCloud.single('photo'), (req, res, next) => {
+router.post('/game/create', ensureLogin.ensureLoggedIn('/login'), uploadCloud.single('photo'), (req, res, next) => {
 const userId = req.user._id
    Game.create({
     creator: userId,
@@ -66,7 +67,7 @@ const userId = req.user._id
 //   });
 // });
 
-router.get('/game/delete/:id', (req, res, next) =>{
+router.get('/game/delete/:id', ensureLogin.ensureLoggedIn('/login'), (req, res, next) =>{
   Game.findByIdAndRemove(req.params.id)
   .then ((response) =>{
     res.redirect('/game')
@@ -76,7 +77,7 @@ router.get('/game/delete/:id', (req, res, next) =>{
   })
 });
 
-router.get('/game/:id', (req, res, next) => {
+router.get('/game/:id', ensureLogin.ensureLoggedIn('/login'), (req, res, next) => {
   var deletable;
   Game.findById(req.params.id)
   .then((gameInfo)=>{

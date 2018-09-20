@@ -7,12 +7,10 @@ const multer      = require("multer");
 const User        = require("../models/User");
 const Game        = require("../models/Game");
 
-router.get("/profile", (req, res, next) => {
+router.get("/profile", ensureLogin.ensureLoggedIn('/login'), (req, res, next) => {
   var editable;
-  console.log("================================ ", req.user);
   User.findById(req.user._id)
   .then((profile) => {
-    console.log("the profile info &&&&&&&&&&&&&&&&&& ", profile);
     if(req.user.username === profile.username){
       editable = true;
       } else {
@@ -36,7 +34,7 @@ router.get("/profile", (req, res, next) => {
   });
 });
 
-router.post('/profile/update/:id', (req, res, next) => {
+router.post('/profile/update/:id', ensureLogin.ensureLoggedIn('/login'), (req, res, next) => {
   const theupdate = {
     username: req.body.username,
     aboutme: req.body.aboutme,
@@ -44,7 +42,6 @@ router.post('/profile/update/:id', (req, res, next) => {
   }
   User.findOneAndUpdate(req.params.id, theupdate)
     .then((response)=>{
-      console.log('=-=-=-=-=-=-', response)
       res.redirect(`/profile`);
 
     })
@@ -55,7 +52,7 @@ router.post('/profile/update/:id', (req, res, next) => {
   
 });
 
-router.get('/profile/edit/:id', (req, res, next) => {
+router.get('/profile/edit/:id', ensureLogin.ensureLoggedIn('/login'), (req, res, next) => {
   User.findById(req.params.id)
 .then((aUser) => {
     res.render('userViews/edit', {theUser: aUser});
