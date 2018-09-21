@@ -19,6 +19,29 @@ button {
   background-color: transparent;
   font: 14px "Permanent Marker", Helvetica, Arial, sans-serif; }
 
+.landing {
+  background-image: url("../images/linkedin_profile_image copy.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 90vh;
+  text-align: center;
+  padding-top: 5vh;
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  padding-right: 10vw; }
+
+.title {
+  font-size: 40px; }
+
+.slogan {
+  font-size: 30px;
+  padding-right: 9vw; }
+
+.title-btn {
+  font-size: 24px;
+  margin-right: 11vw; }
+
 .nav-bar {
   display: flex;
   align-items: center;
