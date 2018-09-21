@@ -3,10 +3,12 @@
 <div class="game-list">
 {{#each listOfGames}}
   <a href="/game/{{this.id}}">{{this.name}}</a>
+  <br>
     <img class="list-image" src="{{this.image}}">
     <br>
 {{/each}}
 </div>
+<br>
   <button onclick="window.location='/game/new';">Add Game</button>
 </div>
 

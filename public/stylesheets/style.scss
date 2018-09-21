@@ -23,7 +23,7 @@ button {
   padding: 1vh;
   background-color: transparent;
   font: 14px "Permanent Marker", Helvetica, Arial, sans-serif;
-
+  outline: none;
 }
 
 .landing {
@@ -74,6 +74,10 @@ button {
   height: 20vw;
 }
 
+.prof-name {
+  text-align: center;
+}
+
 .profile-img {
   height: 35vh;
 }
@@ -94,4 +98,7 @@ button {
   display: flex;
   align-items: center;
   flex-direction: column;
+  border: 2px solid black;
+  padding: 1vw;
+  border-radius: 50px;
 }

@@ -1,5 +1,7 @@
-<h1>{{profile.username}}'s Profile</h1>
 
+<h1 class="prof-name">{{profile.username}}'s Profile</h1>
+
+<div>
 {{#if editable}}
 <button onclick="window.location='/profile/edit/{{profile._id}}';">
   Edit Profile
@@ -15,10 +17,11 @@
   <h4>Games: </h4>
     {{#each games}}
       <a href="/game/{{this.id}}">
-          <p>{{this.name}}</p>
+        {{this.name}}
       </a>
     {{/each}}
     
+</div>
 </div>
 
 <div>
