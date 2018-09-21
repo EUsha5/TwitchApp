@@ -79,7 +79,7 @@ router.get('/game/delete/:id', ensureLogin.ensureLoggedIn('/login'), (req, res, 
 
 router.get('/game/:id', ensureLogin.ensureLoggedIn('/login'), (req, res, next) => {
   var deletable;
-  Game.findById(req.params.id)
+  Game.findById(req.params.id).populate('creator')
   .then((gameInfo)=>{
     User.findById(gameInfo.creator)
     .then((userFromDB) => {
@@ -93,6 +93,7 @@ router.get('/game/:id', ensureLogin.ensureLoggedIn('/login'), (req, res, next) =
         gameCreator: userFromDB,
         deletable: deletable,
       };
+      console.log(data)
       res.render('gameViews/details', data);
     })
     .catch((err) => {

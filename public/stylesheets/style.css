@@ -1,22 +1,39 @@
 @import url("https://fonts.googleapis.com/css?family=Permanent+Marker");
 body {
-  font: 14px "Permanent Marker", Helvetica, Arial, sans-serif; }
+  font: 14px "Permanent Marker", Helvetica, Arial, sans-serif;
+  margin: 0 auto;
+  background: linear-gradient(to bottom, #00416a, #e4e5e6);
+  background-repeat: no-repeat; }
 
 a {
-  color: #00B7FF;
-  text-decoration: none; }
+  color: #000;
+  text-decoration: none;
+  border: 2px solid black;
+  border-radius: 50%;
+  padding: 1vh; }
+
+button {
+  border: 2px solid black;
+  border-radius: 50%;
+  padding: 1vh;
+  background-color: transparent;
+  font: 14px "Permanent Marker", Helvetica, Arial, sans-serif; }
 
 .nav-bar {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   padding-top: 2vh;
-  padding-bottom: 2vh; }
+  padding-bottom: 2vh;
+  background: linear-gradient(to top, #00416a, #e4e5e6); }
 
 .list-image {
   height: 8vw; }
 
 .detail-image {
   height: 20vw; }
+
+.profile-img {
+  height: 35vh; }
 
 /*# sourceMappingURL=style.css.map */

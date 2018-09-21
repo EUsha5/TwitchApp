@@ -1,7 +1,7 @@
 <h3>List of Games</h3>
-<a href="/game/new">
-  <button>Add Game</button>
-</a>
+{{!-- <a href="/game/new"> --}}
+  <button onclick="window.location='/game/new';">Add Game</button>
+{{!-- </a> --}}
 {{#each listOfGames}}
   <a href="/game/{{this.id}}">
     <p>{{this.name}}</p>

@@ -1,14 +1,12 @@
 <h1>{{profile.username}}'s Profile</h1>
 
-{{#if editable}}
-<button onclick="window.location='/profile/edit/{{profile._id}}';">
-  {{!-- <a href="/profile/edit/{{profile.id}}"> --}}
-  Edit Profile
-{{!-- </a> --}}
-</button>
-{{/if}}
+{{!-- {{#if editable}}
+<a href="/profile/edit/{{profile.id}}">
+  <button>Edit Profile</button>
+</a>
+{{/if}} --}}
 
-<img class="profile-img" src="{{profile.avatar}}">
+<img src="{{profile.avatar}}">
 
 <h4>About {{profile.username}}: </h4>
 <p>{{profile.aboutme}}</p>
