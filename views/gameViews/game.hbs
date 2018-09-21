@@ -1,11 +1,12 @@
-<h3>List of Games</h3>
-{{!-- <a href="/game/new"> --}}
-  <button onclick="window.location='/game/new';">Add Game</button>
-{{!-- </a> --}}
+<div class="game-page">
+<h3 class="game-title">List of Games</h3>
+<div class="game-list">
 {{#each listOfGames}}
-  <a href="/game/{{this.id}}">
-    <p>{{this.name}}</p>
-  </a>
+  <a href="/game/{{this.id}}">{{this.name}}</a>
     <img class="list-image" src="{{this.image}}">
+    <br>
 {{/each}}
+</div>
+  <button onclick="window.location='/game/new';">Add Game</button>
+</div>
 

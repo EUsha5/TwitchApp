@@ -1,6 +1,6 @@
 <h2>{{gameInfo.name}}</h2>
 <a href="/profile/{{gameCreator.id}}">
-<h4>{{gameCreator.username}}</h4>
+{{gameCreator.username}}
 </a>
 <img class="detail-image" src="{{gameInfo.image}}">
 
@@ -8,8 +8,8 @@
 
 <a href="{{gameInfo.liveURL}}">Test Me!</a>
 {{#if deletable}}
-<button>
-  <a href="/game/delete/{{gameInfo._id}}">Delete Game</a>
+<button onclick="window.location='/game/delete/{{gameInfo._id}}'">
+  Delete Game
 </button>
 {{/if}}
 

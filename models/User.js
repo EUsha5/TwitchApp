@@ -10,7 +10,7 @@ const userSchema = new Schema({
   aboutme: String,
   games: [{type: Schema.Types.ObjectId, ref: "Game"},],
   comments: [],
-  avatar: {type: String, default: "/images/linkedin_profile_image copy.png"},
+  avatar: {type: String, default: "/images/Game-Start.png"},
 }, {
   timestamps: { createdAt: "created_at", updatedAt: "updated_at" }
 });

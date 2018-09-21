@@ -3,7 +3,8 @@ body {
   font: 14px "Permanent Marker", Helvetica, Arial, sans-serif;
   margin: 0 auto;
   background: linear-gradient(to bottom, #00416a, #e4e5e6);
-  background-repeat: no-repeat; }
+  background-repeat: no-repeat;
+  min-height: 100vh; }
 
 a {
   color: #000;
@@ -20,19 +21,21 @@ button {
   font: 14px "Permanent Marker", Helvetica, Arial, sans-serif; }
 
 .landing {
-  background-image: url("../images/linkedin_profile_image copy.png");
-  background-size: contain;
+  background-image: url("../images/Game-Start.png");
+  background-size: 50% 100%;
   background-repeat: no-repeat;
-  height: 90vh;
+  height: 91vh;
   text-align: center;
-  padding-top: 5vh;
+  margin-top: .35vw;
   display: flex;
   align-items: flex-end;
   flex-direction: column;
   padding-right: 10vw; }
 
 .title {
-  font-size: 40px; }
+  font-size: 65px;
+  width: 30vw;
+  padding-right: 2vw; }
 
 .slogan {
   font-size: 30px;
@@ -40,7 +43,8 @@ button {
 
 .title-btn {
   font-size: 24px;
-  margin-right: 11vw; }
+  margin-right: 11vw;
+  margin-top: 10vh; }
 
 .nav-bar {
   display: flex;
@@ -48,7 +52,8 @@ button {
   justify-content: space-evenly;
   padding-top: 2vh;
   padding-bottom: 2vh;
-  background: linear-gradient(to top, #00416a, #e4e5e6); }
+  background: linear-gradient(to top, #00416a, #e4e5e6);
+  box-shadow: 0px 4px 10px black; }
 
 .list-image {
   height: 8vw; }
@@ -58,5 +63,20 @@ button {
 
 .profile-img {
   height: 35vh; }
+
+.game-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column; }
+
+.game-title {
+  font-size: 36px;
+  text-align: center; }
+
+.game-list {
+  display: flex;
+  align-items: center;
+  flex-direction: column; }
 
 /*# sourceMappingURL=style.css.map */

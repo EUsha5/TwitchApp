@@ -36,15 +36,16 @@ router.get("/profile", ensureLogin.ensureLoggedIn('/login'), (req, res, next) =>
 
 router.get("/profile/:id", ensureLogin.ensureLoggedIn('/login'), (req, res, next) => {
   // var editable;
-  User.findById(req.params._id)
+  User.findById(req.params.id)
   .then((creatorProfile) => {
     // if(req.user.username === creatorProfile.username){
     //   editable = true;
     //   } else {
     //   editable = false;
     //   }    
-     const id = creatorProfile.games.id
-    Game.findById()
+    //  const id = creatorProfile.games.id
+    console.log("the profile info of the user &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& ", creatorProfile)
+    Game.find({ _id: creatorProfile.games})
     .then((response) =>{
       data = {
         creatorProfile: creatorProfile,
@@ -68,8 +69,11 @@ router.post('/profile/update/:id', ensureLogin.ensureLoggedIn('/login'), (req, r
     aboutme: req.body.aboutme,
     avatar: req.body.avatar,
   }
-  User.findOneAndUpdate(req.params.id, theupdate)
+  console.log("this is the update info ========================== ", theupdate);
+  console.log("this is the id of the params  %%%%%%%%%%%%%%%%%%%%%%%%%%% ", req.params.id);
+  User.findByIdAndUpdate(req.params.id, theupdate)
     .then((response)=>{
+      console.log("this is the user info after the update ---------------------- ", response);
       res.redirect(`/profile`);
 
     })

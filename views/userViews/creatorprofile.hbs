@@ -1,21 +1,15 @@
-<h1>{{profile.username}}'s Profile</h1>
+<h1>{{creatorProfile.username}}'s Profile</h1>
 
-{{!-- {{#if editable}}
-<a href="/profile/edit/{{profile.id}}">
-  <button>Edit Profile</button>
-</a>
-{{/if}} --}}
+<img class="profile-img" src="{{creatorProfile.avatar}}">
 
-<img src="{{profile.avatar}}">
-
-<h4>About {{profile.username}}: </h4>
-<p>{{profile.aboutme}}</p>
+<h4>About {{creatorProfile.username}}: </h4>
+<p>{{creatorProfile.aboutme}}</p>
 
 <div>
   <h4>Games: </h4>
     {{#each games}}
       <a href="/game/{{this.id}}">
-          <p>{{this.name}}</p>
+          {{this.name}}
       </a>
     {{/each}}
     
@@ -23,7 +17,7 @@
 
 <div>
   <h4>Comments: </h4>
-  {{#each profile.comments}}
+  {{#each creatorProfile.comments}}
   <p>{{this.owner}}: </p>
   <p>{{this.comment}}</p>
   {{/each}}

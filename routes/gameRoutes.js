@@ -83,7 +83,9 @@ router.get('/game/:id', ensureLogin.ensureLoggedIn('/login'), (req, res, next) =
   .then((gameInfo)=>{
     User.findById(gameInfo.creator)
     .then((userFromDB) => {
-      if(req.user._id.toString() === gameInfo.creator.toString()){
+      console.log("the user id ========================== ", req.user._id);
+      console.log("the game id -------------------------- ", gameInfo.creator._id);
+      if(req.user._id.toString() === gameInfo.creator._id.toString()){
         deletable = true;
         } else {
         deletable = false;
