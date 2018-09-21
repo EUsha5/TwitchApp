@@ -79,6 +79,7 @@ app.set('view engine', 'hbs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
+
 //passport set up
 app.use(session({
   secret: "basic-auth-secret",
@@ -105,7 +106,7 @@ app.use(function (req, res, next){
   next();
 })
 
-
+// app.use(express.favicon());
 
 const index = require('./routes/index');
 app.use('/', index);

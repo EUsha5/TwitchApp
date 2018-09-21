@@ -1,15 +1,17 @@
+<div class="text">
+<h1>{{profile.username}}'s Profile</h1>
 
-<h1 class="prof-name">{{profile.username}}'s Profile</h1>
-
-<div>
+<div class="text">
+<div class="text">
+<img class="profile-img" src="{{profile.avatar}}">
 {{#if editable}}
 <button onclick="window.location='/profile/edit/{{profile._id}}';">
   Edit Profile
 </button>
 {{/if}}
 
-<img class="profile-img" src="{{profile.avatar}}">
 
+</div>
 <h4>About {{profile.username}}: </h4>
 <p>{{profile.aboutme}}</p>
 
@@ -23,11 +25,12 @@
     
 </div>
 </div>
+</div>
 
-<div>
+{{!-- <div>
   <h4>Comments: </h4>
   {{#each profile.comments}}
   <p>{{this.owner}}: </p>
   <p>{{this.comment}}</p>
   {{/each}}
-</div>
+</div> --}}

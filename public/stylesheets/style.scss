@@ -66,9 +66,20 @@ button {
   box-shadow: 0px 4px 10px black;
 }
 
+.text {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;;
+}
+
+.font {
+  font-size: 46px;
+}
+
 .list-image{
   height: 9vw;
-
 }
 
 .img-div{
@@ -78,10 +89,6 @@ button {
 }
 .detail-image{
   height: 20vw;
-}
-
-.prof-name {
-  text-align: center;
 }
 
 .profile-img {

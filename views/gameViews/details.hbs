@@ -1,7 +1,10 @@
-<h2 class="prof-name">{{gameInfo.name}}</h2>
+<div class="text">
+
+<h2 class="text">{{gameInfo.name}}</h2>
 <a href="/profile/{{gameCreator.id}}">
 {{gameCreator.username}}
 </a>
+<br>
 <img class="detail-image" src="{{gameInfo.image}}">
 
 <p>{{gameInfo.description}}</p>
@@ -13,3 +16,4 @@
 </button>
 {{/if}}
 
+</div>
