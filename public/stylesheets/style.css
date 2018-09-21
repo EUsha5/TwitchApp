@@ -59,6 +59,11 @@ button {
 .list-image {
   height: 8vw; }
 
+.img-div {
+  height: 20vh;
+  width: 10vw;
+  overflow: hidden; }
+
 .detail-image {
   height: 20vw; }
 
